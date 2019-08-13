@@ -16,19 +16,37 @@ const usersCreateModel = `
 `;
 
 
-const postsCreateModel = `
-  CREATE TABLE IF NOT EXISTS posts (
-    id INT(11) NOT NULL AUTO_INCREMENT,
-    userId INT DEFAULT 10,
-    text VARCHAR(400),
-    likes INT,
-    comments INT,
-    PRIMARY KEY (id),
-    FOREIGN KEY (userId) REFERENCES users(id)
-  )
+const ordersModel = `
+  CREATE TABLE IF NOT EXISTS orderscart (
+  customer_id int(11) NOT NULL,
+  items_id int(11) NOT NULL,
+   PRIMARY KEY (customer_id),
+ FOREIGN KEY (customer_id) REFERENCES users (id) ON DELETE NO ACTION ON UPDATE NO ACTION
+  
+) 
+`;
+
+const itemsModel = `
+CREATE TABLE IF NOT EXISTS items (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  name varchar(45) NOT NULL,
+  price varchar(45) NOT NULL,
+  item_company_id int(11) DEFAULT NULL,
+  PRIMARY KEY (id),
+  FOREIGN KEY (item_company_id) REFERENCES company (id) ON DELETE NO ACTION ON UPDATE NO ACTION
+) 
+`;
+const shopcartModel = `
+CREATE TABLE IF NOT EXISTS shopcart (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  shopCart_item_id int(11) NOT NULL,
+  PRIMARY KEY (id)
+) 
 `
 
 export default {
   usersCreateModel,
-  postsCreateModel,
+  ordersModel,
+  itemsModel,
+  shopcartModel
 }
