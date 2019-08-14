@@ -4,7 +4,7 @@ import models from '../migrations/createTables';
 // import { userInfo } from 'os';
 
 const dbConfig = mysqlConfigs['dev'];
-const { usersCreateModel, ordersModel, itemsModel, shopcartModel } = models;
+const { usersCreateModel, ordersModel, itemsModel, shopcartModel,companyModel } = models;
 const con = mysql.createConnection(dbConfig);
 
 
@@ -14,6 +14,7 @@ con.query(usersCreateModel);
 con.query(ordersModel);
 con.query(itemsModel);
 con.query(shopcartModel);
+con.query(companyModel);
 });
 
 export default { con };

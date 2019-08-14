@@ -42,11 +42,20 @@ CREATE TABLE IF NOT EXISTS shopcart (
   shopCart_item_id int(11) NOT NULL,
   PRIMARY KEY (id)
 ) 
-`
+`;
+
+const companyModel = `
+CREATE TABLE IF NOT EXISTS company (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  companyName varchar(45) NOT NULL,
+  PRIMARY KEY (id)
+) 
+`;
 
 export default {
   usersCreateModel,
   ordersModel,
   itemsModel,
-  shopcartModel
+  shopcartModel,
+  companyModel
 }
