@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import actions from './actions';
 
-const { create, list, get, del, update, login, listUserPosts } = actions;
+const { create, list, get, del, update, login, listUserOrders } = actions;
  
 const ordersRouter = Router();
 
