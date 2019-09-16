@@ -16,13 +16,20 @@ const usersCreateModel = `
 `;
 
 
+
 const ordersModel = `
-  CREATE TABLE IF NOT EXISTS orderscart (
-  customer_id int(11) NOT NULL,
-  items_id int(11) NOT NULL,
-   PRIMARY KEY (customer_id),
- FOREIGN KEY (customer_id) REFERENCES users (id) ON DELETE NO ACTION ON UPDATE NO ACTION
-  
+CREATE TABLE IF NOT EXISTS orders(
+    id INT(10) NOT NULL AUTO_INCREMENT,
+    dateOrdered VARCHAR(25),
+    PRIMARY KEY (id),
+    userID INT(10),
+    FOREIGN KEY (userID) REFERENCES users(id),
+    paymentCardsID INT(10),
+    FOREIGN KEY (paymentCardsID) REFERENCES paymentCards(id),
+    itemsID INT(10),
+    FOREIGN KEY (itemsID) REFERENCES items(id),
+    cartID INT(10),
+    FOREIGN KEY (cartID) REFERENCES cart(id)
 ) 
 `;
 
@@ -48,6 +55,7 @@ const companyModel = `
 CREATE TABLE IF NOT EXISTS company (
   id int(11) NOT NULL AUTO_INCREMENT,
   companyName varchar(45) NOT NULL,
+  companyItems varchar(55) NOT NULL,
   PRIMARY KEY (id)
 ) 
 `;
