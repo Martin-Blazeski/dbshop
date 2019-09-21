@@ -3,13 +3,13 @@ import users from '../users/index';
 import orders from '../orders/index';
 import items from '../items/index';
 
-const { routes } = users;
-const { orders.routes } = orders;
-const { items.routes } = items;
+const userRouter = users.routes
+const ordersRouter = orders.routes
+const itemsRouter = items.routes
 const indexRouter = Router();
 
-indexRouter.use(routes);
-indexRouter.use(orders.routes);
-indexRouter.use(items.routes);
+indexRouter.use(userRouter);
+indexRouter.use(ordersRouter);
+indexRouter.use(itemsRouter);
 
 export default indexRouter;

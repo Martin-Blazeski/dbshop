@@ -54,10 +54,10 @@ const listOne = async(req, res, next) => {
   await next;
 }
 
-function createNewItem(name, price, location) {
-  const createItemsQuery = "INSERT INTO items (name, price, company) VALUES (?, ?, ?)";
+function createNewItem(name, price, item_company_id) {
+  const createItemsQuery = "INSERT INTO items (name, price, item_company_id) VALUES (?, ?, ?)";
   return new Promise((resolve, reject) => {
-    con.query(createItemsQuery, [name, price, location], (err, results) => {
+    con.query(createItemsQuery, [name, price, item_company_id], (err, results) => {
       if(err) {
         reject(err);
         console.error(err);
@@ -71,14 +71,14 @@ function createNewItem(name, price, location) {
 const create = async(req, res, next) => {
   const name = req.body.name;
   const price = req.body.price;
-  const location = req.body.location;
-
+  const item_company_id = req.body.item_company_id;
   try {
-    const newItem = await createNewItem(name, price, location);
-    res.status(201).send({success: true, message: "New items has been added to the store", body: {name, price, company}});
+    const newItem = await createNewItem(name, price, item_company_id);
+    res.status(201).send({success: true, message: "New items has been added to the store", body: {name, price, item_company_id}});
   } catch(err) {
     res.status(404).send({success: false, message: err.message});
   }
+  await next;
 };
 
 function deleteItem(id) {
@@ -103,6 +103,7 @@ const erase = async(req, res, next) => {
   } catch(err) {
     res.status(403).send({success: false, message: `Unable to delete item with ID: ${id}`});
   }
+  await next;
 };
 
 module.exports = {

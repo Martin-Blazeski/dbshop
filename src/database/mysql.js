@@ -11,10 +11,10 @@ const con = mysql.createConnection(dbConfig);
 con.connect(() => {
 console.log('db connection is on');
 con.query(usersCreateModel);
-con.query(ordersModel);
-con.query(itemsModel);
-con.query(shopcartModel);
 con.query(companyModel);
+con.query(itemsModel);
+con.query(ordersModel);
+con.query(shopcartModel);
 });
 
 export default { con };

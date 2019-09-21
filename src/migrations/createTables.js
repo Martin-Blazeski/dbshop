@@ -22,14 +22,10 @@ CREATE TABLE IF NOT EXISTS orders(
     id INT(10) NOT NULL AUTO_INCREMENT,
     dateOrdered VARCHAR(25),
     PRIMARY KEY (id),
-    userID INT(10),
-    FOREIGN KEY (userID) REFERENCES users(id),
-    paymentCardsID INT(10),
-    FOREIGN KEY (paymentCardsID) REFERENCES paymentCards(id),
+    userId INT(10),
+    FOREIGN KEY (userId) REFERENCES users(id),
     itemsID INT(10),
-    FOREIGN KEY (itemsID) REFERENCES items(id),
-    cartID INT(10),
-    FOREIGN KEY (cartID) REFERENCES cart(id)
+    FOREIGN KEY (itemsID) REFERENCES items(id)
 ) 
 `;
 
@@ -39,8 +35,7 @@ CREATE TABLE IF NOT EXISTS items (
   name varchar(45) NOT NULL,
   price varchar(45) NOT NULL,
   item_company_id int(11) DEFAULT NULL,
-  PRIMARY KEY (id),
-  FOREIGN KEY (item_company_id) REFERENCES company (id) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (id)
 ) 
 `;
 const shopcartModel = `

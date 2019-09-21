@@ -3,9 +3,6 @@ import Bluebird from 'bluebird';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-const { con } = database;
-
-const database = require('../database/mysql.js');
 
 const { con } = database;
 
@@ -60,10 +57,10 @@ const listOne = async(req, res, next) => {
     await next;
 };
 
-function insertToCart(dateInserted, userID, paymentCardsID, itemsID) {
-    const makingOrderQuery = "INSERT INTO orders (dateInserted, userID, paymentCardsID, itemsID) VALUES (?, ?, ?, ?)"
+function insertToCart(dateInserted, userID, itemsID) {
+    const makingOrderQuery = "INSERT INTO orders (dateOrdered, userId, itemsID) VALUES (?, ?, ?)"
     return new Promise((resolve, reject) => {
-        con.query(makingOrderQuery, [dateInserted, userID, paymentCardsID, itemsID], (err, results) => {
+        con.query(makingOrderQuery, [dateInserted, userID, itemsID], (err, results) => {
             if(err) {
                 reject(err);
                 console.error(err);
@@ -75,12 +72,12 @@ function insertToCart(dateInserted, userID, paymentCardsID, itemsID) {
 };
 
 const create = async(req, res, next) => {
+    console.log(req.params)
     const dateInserted = new Date(Date.now());
-    const userID = req.params.id;
-    const paymentCardsID = req.body.paymentCardsID;
-    const itemsID = req.body.itemsID;
+    const userID = req.params.userId;
+    const itemsID = req.params.itemId;
     try{
-        const newOrder = await insertToCart(dateInserted, userID, paymentCardsID, itemsID);
+        const newOrder = await insertToCart(dateInserted, userID, itemsID);
         res.status(200).send({success: true, message: "New items have been added to the cart", body: newOrder});
     } catch(err) {
         res.status(401).send({success: false, message: err.message});
